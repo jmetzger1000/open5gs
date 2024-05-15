@@ -353,10 +353,10 @@ void ogs_sbi_nf_state_de_registered(ogs_fsm_t *s, ogs_event_t *e)
 
     switch (e->id) {
     case OGS_FSM_ENTRY_SIG:
-        if (NF_INSTANCE_TYPE_IS_NRF(nf_instance)) {
-            ogs_info("[%s] NF de-registered",
-                    NF_INSTANCE_ID(ogs_sbi_self()->nf_instance));
-        }
+        ogs_info("[%s] NF de-registered",
+                NF_INSTANCE_ID(ogs_sbi_self()->nf_instance));
+        ogs_sbi_nf_fsm_fini(nf_instance);
+        ogs_sbi_nf_instance_remove(nf_instance);
         break;
 
     case OGS_FSM_EXIT_SIG:

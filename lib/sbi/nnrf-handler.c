@@ -1124,7 +1124,7 @@ bool ogs_nnrf_nfm_handle_nf_status_notify(
                         OpenAPI_nf_type_ToString(nf_instance->nf_type) :
                         "NULL",
                     nf_instance->id);
-            ogs_sbi_nf_fsm_fini((nf_instance));
+            ogs_sbi_nf_fsm_fini(nf_instance);
             ogs_sbi_nf_instance_remove(nf_instance);
         } else {
             ogs_warn("[%s] (NRF-notify) Not found",
