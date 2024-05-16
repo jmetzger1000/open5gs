@@ -2248,7 +2248,7 @@ ogs_sbi_client_t *ogs_sbi_client_find_by_service_type(
             return nf_service->client;
     }
 
-    return nf_instance->client;
+    return NULL;
 }
 
 void ogs_sbi_object_free(ogs_sbi_object_t *sbi_object)
