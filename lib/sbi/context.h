@@ -475,7 +475,7 @@ int ogs_sbi_default_client_port(OpenAPI_uri_scheme_e scheme);
         ogs_assert((__nFInstance)->t_validity); \
         \
         if ((__cTX).nf_instance) { \
-            ogs_warn("[%s] NF Instance updated [type:%s validity:%d]", \
+            ogs_warn("[%s] NF Instance updated [type:%s validity:%ds]", \
                     ((__cTX).nf_instance)->id, \
                     OpenAPI_nf_type_ToString(((__cTX).nf_instance)->nf_type), \
                     ((__cTX).nf_instance)->time.validity_duration); \
@@ -487,7 +487,7 @@ int ogs_sbi_default_client_port(OpenAPI_uri_scheme_e scheme);
         } else { \
             ((__cTX).validity_timeout) = 0; \
         } \
-        ogs_info("[%s] NF Instance setup [type:%s validity:%d]", \
+        ogs_info("[%s] NF Instance setup [type:%s validity:%ds]", \
                 (__nFInstance)->id, \
                 OpenAPI_nf_type_ToString((__nFInstance)->nf_type), \
                 (__nFInstance)->time.validity_duration); \
@@ -505,6 +505,12 @@ int ogs_sbi_default_client_port(OpenAPI_uri_scheme_e scheme);
     ((__cTX).validity_timeout == 0 || \
      (__cTX).validity_timeout > ogs_get_monotonic_time() ? \
         ((__cTX).nf_instance) : NULL)
+
+#define OGS_SBI_NF_INSTANCE_VALID(__nFInstance) \
+    (((__nFInstance) && ((__nFInstance)->t_validity) && \
+     ((__nFInstance)->time.validity_duration == 0 || \
+      (__nFInstance)->t_validity->timeout > ogs_get_monotonic_time())) ? \
+         true : false)
 
 bool ogs_sbi_discovery_param_is_matched(
         ogs_sbi_nf_instance_t *nf_instance,

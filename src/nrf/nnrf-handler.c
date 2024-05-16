@@ -1176,12 +1176,12 @@ static void handle_nf_discover_search_result(
              * is not executed later in nrf_context_final().
              */
 
-            ogs_info("[%s:%s] (NF-discover) NF registered",
+            ogs_info("[%s] (NF-discover) NF registered [type:%s]",
                     NFProfile->nf_instance_id,
                     OpenAPI_nf_type_ToString(NFProfile->nf_type));
         } else {
 
-            ogs_warn("[%s:%s] (NF-discover) NF has already been added",
+            ogs_warn("[%s] (NF-discover) NF has already been added [type:%s]",
                     NFProfile->nf_instance_id,
                     OpenAPI_nf_type_ToString(NFProfile->nf_type));
         }
@@ -1199,7 +1199,7 @@ static void handle_nf_discover_search_result(
                 break;
             }
 
-            ogs_info("[%s:%s] (NF-discover) NF Profile updated",
+            ogs_info("[%s] (NF-discover) NF Profile updated [type:%s]",
                         nf_instance->id,
                         OpenAPI_nf_type_ToString(nf_instance->nf_type));
         }
