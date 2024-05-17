@@ -2118,9 +2118,6 @@ bool ogs_sbi_discovery_param_is_matched(
     if (NF_INSTANCE_EXCLUDED_FROM_DISCOVERY(nf_instance))
         return false;
 
-    if (!OGS_FSM_CHECK(&nf_instance->sm, ogs_sbi_nf_state_registered))
-        return false;
-
     if (nf_instance->nf_type != target_nf_type)
         return false;
 

@@ -1092,9 +1092,11 @@ bool ogs_nnrf_nfm_handle_nf_status_notify(
             ogs_warn("[%s] (NRF-notify) NF has already been added [type:%s]",
                     nf_instance->id,
                     OpenAPI_nf_type_ToString(nf_instance->nf_type));
-
-            ogs_assert(OGS_FSM_STATE(&nf_instance->sm));
-            ogs_sbi_nf_fsm_tran(nf_instance, ogs_sbi_nf_state_registered);
+            if (!OGS_FSM_CHECK(&nf_instance->sm, ogs_sbi_nf_state_registered)) {
+                ogs_error("[%s] (NRF-notify) NF invalid state [type:%s]",
+                        nf_instance->id,
+                        OpenAPI_nf_type_ToString(nf_instance->nf_type));
+            }
         }
 
         ogs_nnrf_nfm_handle_nf_profile(nf_instance, NFProfile);
@@ -1204,9 +1206,11 @@ void ogs_nnrf_disc_handle_nf_discover_search_result(
             ogs_warn("[%s] (NRF-discover) NF has already been added [type:%s]",
                     nf_instance->id,
                     OpenAPI_nf_type_ToString(nf_instance->nf_type));
-
-            ogs_assert(OGS_FSM_STATE(&nf_instance->sm));
-            ogs_sbi_nf_fsm_tran(nf_instance, ogs_sbi_nf_state_registered);
+            if (!OGS_FSM_CHECK(&nf_instance->sm, ogs_sbi_nf_state_registered)) {
+                ogs_error("[%s] (NRF-notify) NF invalid state [type:%s]",
+                        nf_instance->id,
+                        OpenAPI_nf_type_ToString(nf_instance->nf_type));
+            }
         }
 
         if (NF_INSTANCE_ID_IS_OTHERS(nf_instance->id)) {
