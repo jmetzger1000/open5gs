@@ -343,9 +343,8 @@ void ogs_sbi_nf_state_de_registered(ogs_fsm_t *s, ogs_event_t *e)
     switch (e->id) {
     case OGS_FSM_ENTRY_SIG:
         ogs_info("[%s] NF de-registered [type:%s]",
-                NF_INSTANCE_ID(ogs_sbi_self()->nf_instance),
-                OpenAPI_nf_type_ToString(
-                    NF_INSTANCE_TYPE(ogs_sbi_self()->nf_instance)));
+                nf_instance->id,
+                OpenAPI_nf_type_ToString(nf_instance->nf_type));
         ogs_sbi_nf_fsm_fini(nf_instance);
         ogs_sbi_nf_instance_remove(nf_instance);
         break;
